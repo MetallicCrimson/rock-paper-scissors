@@ -15,9 +15,9 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     // Assume: the user always returns a correct choice
-    // ...why?
+    // ...which is fine for now, I guess
 
-    let choice = prompt("What's your choice?");
+    let choice = prompt("What's your choice?", "rock");
     
     return choice;
 }
@@ -66,30 +66,45 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 
+    let displayText = `Computer chose ${capitalize(computerChoice)}.\n`
+
     switch (winStatus) {
         case 0:
-            console.log(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}.`);
+            displayText += `You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}.`;
             humanScore++;
             break;
         case 1:
-            console.log(`You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}.`);
+            displayText += `You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}.`;
             computerScore++;
             break;
         case 2:
-            console.log(`It's a tie! Both choices were ${capitalize(humanChoice)}.`);
+            displayText += `It's a tie! Both choices were ${capitalize(humanChoice)}.`;
             break;
     }
+
+    console.log(displayText)
 }
 
 function playGame() {
     for (let i = 0; i < 5; i++) {
-        console.log(`Round ${i+1}`);
+        console.log(`Round ${i+1}\n  # Human: ${humanScore}\n  # Computer: ${computerScore}`);
         let tempHumanChoice = getHumanChoice();
         playRound(tempHumanChoice, getComputerChoice());
     }
 
-    console.log(humanScore, computerScore);
+    let result;
+    if (humanScore - computerScore < 0) {
+        result = "You lost! Fool, did you really think you can defeat me?";
+    } else if (humanScore - computerScore > 0) {
+        result = "You win! How... how could this happen?"
+    } else {
+        result = "It's a tie! What an intense battle!";
+    }
+
+    console.log(`Your final score: ${humanScore}\nComputer's final score: ${computerScore}\n${result}`);
 }
 
 let humanScore = 0;
 let computerScore = 0;
+
+playGame();
