@@ -12,3 +12,12 @@ function getComputerChoice() {
             return "How in the nine hells?";
     }
 }
+
+function getHumanChoice() {
+    // Assume: the user always returns a correct choice
+    // ...why?
+
+    let choice = prompt("What's your choice?");
+    
+    return choice;
+}
