@@ -88,6 +88,7 @@ function playRound(humanChoice, computerChoice) {
 function playGame() {
     for (let i = 0; i < 5; i++) {
         console.log(`Round ${i+1}\n  # Human: ${humanScore}\n  # Computer: ${computerScore}`);
+
         let tempHumanChoice = getHumanChoice();
         playRound(tempHumanChoice, getComputerChoice());
     }
@@ -103,6 +104,8 @@ function playGame() {
 
     console.log(`Your final score: ${humanScore}\nComputer's final score: ${computerScore}\n${result}`);
 }
+
+alert(`If console.log messages don't show up, it might be an issue with Chrome - refresh the page, and they should work just fine.\nGood luck beating me in RPS!`);
 
 let humanScore = 0;
 let computerScore = 0;
