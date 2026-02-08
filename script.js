@@ -13,21 +13,15 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    // Assume: the user always returns a correct choice
-    // ...which is fine for now, I guess
-
-    let choice = prompt("What's your choice?", "rock");
-    
-    return choice;
-}
-
 function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
 }
 
 function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toLowerCase();
+
+    humanMove.textContent = capitalize(humanChoice);
+    computerMove.textContent = capitalize(computerChoice);
     // 0: win; 1: lose; 2: tie
     let winStatus;
 
@@ -70,44 +64,76 @@ function playRound(humanChoice, computerChoice) {
 
     switch (winStatus) {
         case 0:
-            displayText += `You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}.`;
-            humanScore++;
+            comparison.innerText = "defeats\nYou win this round!";
+            humanPoints.textContent = ++humanScore;
             break;
         case 1:
-            displayText += `You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}.`;
-            computerScore++;
+            comparison.innerText = "loses to\nYou lose this round!";
+            computerPoints.textContent = ++computerScore;
             break;
         case 2:
-            displayText += `It's a tie! Both choices were ${capitalize(humanChoice)}.`;
+            comparison.innerText = "ties with\nIt's a tie!";
             break;
     }
 
-    console.log(displayText)
-}
-
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        console.log(`Round ${i+1}\n  # Human: ${humanScore}\n  # Computer: ${computerScore}`);
-
-        let tempHumanChoice = getHumanChoice();
-        playRound(tempHumanChoice, getComputerChoice());
+    if (humanScore >= 5) {
+        comparison.innerText += "\nYou win! How... how could this happen?";
+        endGame();
+    } else if (computerScore >= 5) {
+        comparison.innerText += "\nYou lost! Fool, did you really think you can defeat me?";
+        endGame();
     }
 
-    let result;
-    if (humanScore - computerScore < 0) {
-        result = "You lost! Fool, did you really think you can defeat me?";
-    } else if (humanScore - computerScore > 0) {
-        result = "You win! How... how could this happen?"
-    } else {
-        result = "It's a tie! What an intense battle!";
-    }
-
-    console.log(`Your final score: ${humanScore}\nComputer's final score: ${computerScore}\n${result}`);
 }
 
-alert(`If console.log messages don't show up, it might be an issue with Chrome - refresh the page, and they should work just fine.\nGood luck beating me in RPS!`);
+function endGame() {
+    resetButton.classList.remove("inactive");
 
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+}
+
+function initializeGame() {
+    console.log("Heeyaayayeyeayey");
+    resetButton.classList.add("inactive");
+
+    humanScore = 0;
+    computerScore = 0;
+    humanPoints.textContent = 0;
+    computerPoints.textContent = 0;
+    humanMove.textContent = "";
+    computerMove.textContent = "";
+    comparison.textContent = "";
+
+    rockButton.disabled = false;
+    paperButton.disabled = false;
+    scissorsButton.disabled = false;
+}
 let humanScore = 0;
 let computerScore = 0;
 
-playGame();
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+const humanPoints = document.querySelector("#player-column > .points");
+const computerPoints = document.querySelector("#computer-column > .points");
+const humanMove = document.querySelector("#player-column > .move");
+const computerMove = document.querySelector("#computer-column > .move");
+const comparison = document.querySelector("#comparison");
+const resetButton = document.querySelector("#reset");
+
+
+rockButton.addEventListener("click", () => playRound("rock", getComputerChoice()));
+paperButton.addEventListener("click", () => playRound("paper", getComputerChoice()));
+scissorsButton.addEventListener("click", () => playRound("scissors", getComputerChoice()));
+resetButton.addEventListener("click", initializeGame);
+
+function displayScore(humanScore, computerScore) {
+    humanPoints.textContent = humanScore;
+    computerPoints.textContent = computerScore;
+}
+
+initializeGame();
