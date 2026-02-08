@@ -60,8 +60,6 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 
-    let displayText = `Computer chose ${capitalize(computerChoice)}.\n`
-
     switch (winStatus) {
         case 0:
             comparison.innerText = "defeats\nYou win this round!";
