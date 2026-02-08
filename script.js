@@ -95,7 +95,6 @@ function endGame() {
 }
 
 function initializeGame() {
-    console.log("Heeyaayayeyeayey");
     resetButton.classList.add("inactive");
 
     humanScore = 0;
