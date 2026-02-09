@@ -1,0 +1,31 @@
+body,html {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(136, 136, 136);
+}
+
+#container {
+    position: relative;
+    width: 600px;
+    height: 800px;
+
+    /* margin: 40px auto; */
+
+    border: 1px solid black;
+    background-color: rgb(24, 24, 24);
+    box-shadow: black 0px 0px 20px;
+}
+
+#test {
+    position: relative;
+    width: 20px;
+    height: 50px;
+    background-color: magenta;
+}
