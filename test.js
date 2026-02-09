@@ -10,9 +10,11 @@ function keyDownFunction(e) {
             break;
         case "ArrowLeft":
             leftPressed = true;
+            testPlayer.style.transform = "rotateY(40deg) rotateZ(-20deg)";
             break;
         case "ArrowRight":
             rightPressed = true;
+            testPlayer.style.transform = "rotateY(40deg) rotateZ(20deg)";
             break;
         default:
             break;
@@ -29,9 +31,11 @@ function keyUpFunction(e) {
             break;
         case "ArrowLeft":
             leftPressed = false;
+            testPlayer.style.transform = "rotateY(0deg)";
             break;
         case "ArrowRight":
             rightPressed = false;
+            testPlayer.style.transform = "rotateY(0deg)";
             break;
         default:
             break;
@@ -47,8 +51,8 @@ function testFunction(e) {
 //     requestAnimationFrame(step);
 // }
 
-const testPlayer = document.querySelector("#test");
-const testRect = testPlayer.getBoundingClientRect();
+const testPlayer = document.querySelector("#player");
+// const testRect = testPlayer.getBoundingClientRect();
 const container = document.querySelector("#container")
 
 document.body.addEventListener("keydown", keyDownFunction);
@@ -59,11 +63,11 @@ let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-let yOffset = container.getBoundingClientRect().top
-let xOffset = container.getBoundingClientRect().left
+// let yOffset = container.getBoundingClientRect().top
+// let xOffset = container.getBoundingClientRect().left
 
-testPlayer.style.left = 0;
-testPlayer.style.top = 0;
+testPlayer.style.left = "265px";
+testPlayer.style.top = "650px";
 
 window.onload = function() {
     function test () {

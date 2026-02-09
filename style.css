@@ -68,7 +68,10 @@ body {
     border: 1px solid rgb(110, 110, 110);
     border-radius: 5px;
     background-color: rgb(228, 228, 228);
-    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     min-height: 2em;
 }

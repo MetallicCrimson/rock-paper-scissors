@@ -8,7 +8,7 @@ body,html {
 }
 
 body {
-    background-color: rgb(136, 136, 136);
+    background-color: #5f748f;
 }
 
 #container {
@@ -17,15 +17,66 @@ body {
     height: 800px;
 
     margin: 40px auto;
+    padding: 20px;
 
     border: 1px solid black;
-    background-color: rgb(24, 24, 24);
+    background-color: #2e0a30;
     box-shadow: black 0px 0px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#test {
-    position: relative;
+#player {
+    position: absolute;
     width: 20px;
     height: 50px;
-    background-color: magenta;
+    /* background-color: magenta; */
+
+    transition: transform .3s;
+}
+
+.healthbar {
+    border-radius: 20px;
+    background-color: #991919;
+    height: 20px;
+    width: 560px;
+}
+
+#computer-healthbar {
+}
+
+#player-healthbar {
+}
+
+#playing-screen {
+    position: relative;
+    width: 550px;
+    /* border: 1px solid magenta; */
+    height: 100%;
+}
+
+.inactive {
+    display: none;
+}
+
+#choices {
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 500px;
+    display: flex;
+    gap: 20px;
+}
+
+#choices > div {
+    height: 40px;
+    background-color: #6f1d5c;
+    border-radius: 4px;
+    width: 170px;
+
+    color: transparent;
+    font-size: 2em;
+    text-shadow: #0d001a 0px 0px;
 }
