@@ -69,18 +69,18 @@ window.onload = function() {
     function test () {
         // testPlayer.style.top = testPlayer.getBoundingClientRect().top-40 + SPEED + "px";
         if (leftPressed) {
-            testPlayer.style.left = parseInt(testPlayer.style.left)-xOffset - SPEED + "px";
+            testPlayer.style.left = parseInt(testPlayer.style.left) - SPEED + "px";
             console.log(testPlayer.style.left);
         }
         if (rightPressed) {
-            testPlayer.style.left = parseInt(testPlayer.style.left)-xOffset + SPEED + "px";
+            testPlayer.style.left = parseInt(testPlayer.style.left) + SPEED + "px";
             console.log(testPlayer.style.left);
         }
         if (upPressed) {
-            testPlayer.style.top = parseInt(testPlayer.style.top)-yOffset - SPEED + "px";
+            testPlayer.style.top = parseInt(testPlayer.style.top) - SPEED + "px";
         }
         if (downPressed) {
-            testPlayer.style.top = parseInt(testPlayer.style.top)-yOffset + SPEED + "px";
+            testPlayer.style.top = parseInt(testPlayer.style.top) + SPEED + "px";
         }
     }
 
