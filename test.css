@@ -101,6 +101,10 @@ body {
 
     color: transparent;
     font-size: 2.2em;
+
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+    animation-timing-function: cubic-bezier(0.21, 0.76, 0.52, 0.95);
 }
 
 #computer-choice {
@@ -115,4 +119,67 @@ body {
     text-shadow: #6ceded 0px 0px;
     left: 250px;
     top: 450px;
+    
+}
+
+@keyframes player-winning {
+    0% {
+        top: 450px;
+    }
+
+    100% {
+        top: 10px;
+    }
+}
+
+@keyframes computer-losing {
+    0% {
+        z-index: 0;
+        top: 250px;
+    }
+
+    10% {
+        opacity: 100%;
+    }
+
+    50% {
+        top: 450px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 450px;
+    }
+
+}
+
+@keyframes computer-winning {
+    0% {
+        z-index: 1;
+        top: 250px;
+    }
+
+    100% {
+        top: 685px;
+    }
+}
+
+@keyframes player-losing {
+    0% {
+        top: 450px;
+    }
+
+    10% {
+        opacity: 100%;
+    }
+
+    50% {
+        top: 260px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 260px;
+    }
+
 }

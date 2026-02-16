@@ -198,11 +198,14 @@ function playRound(playerChoiceInt, computerChoiceInt) {
     playerChoiceDiv.style.transform = "scale(1)";
 
     setTimeout(() => {
-        if (winStatus === 0) {
-            computerChoiceDiv.style.transition = "top .5s linear";
-            computerChoiceDiv.style.top = "330px";
-            playerChoiceDiv.style.transition = "top " + (11/4) + "s linear";
-            playerChoiceDiv.style.top = "10px";
+        if (true) { // (winStatus === 0) {
+            // computerChoiceDiv.style.transition = "top .5s linear";
+            // computerChoiceDiv.style.top = "330px";
+            // playerChoiceDiv.style.transition = "top " + (11/4) + "s linear";
+            // playerChoiceDiv.style.top = "10px";
+
+            playerChoiceDiv.style.animationName = "player-winning";
+            computerChoiceDiv.style.animationName = "computer-losing";
         }
     }, 1500);
 
@@ -211,3 +214,4 @@ function playRound(playerChoiceInt, computerChoiceInt) {
 
     
 }
+
