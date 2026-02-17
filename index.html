@@ -5,45 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script defer src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="test.css">
+    <script defer src="test.js"></script>
 </head>
 <body>
     <div id="container">
-        <div id="player-column">
-            <div class="pfp">
-                👤
+        <div id="computer-healthbar" class="healthbar"></div>
+
+        <div id="playing-screen">
+            <div id="choices">
+                <div id="rock-area">✊</div>
+                <div id="paper-area">✋</div>
+                <div id="scissors-area">✌️</div>
             </div>
-            <div class="points">
-                
-            </div>
-            <div class="move">
-                
-            </div>
-            <div class="buttons">
-                <button id="rock">Rock</button>
-                <button id="paper">Paper</button>
-                <button id="scissors">Scissors</button>
-            </div>
+
+            <div id="player"><img src="player.png" width="20px" height="50px"></div>
+            
         </div>
-        <div id="middle-column">
-            <div id="comparison"></div>
-            <button id="reset" class="inactive">Play again!</button>
+
+        <div id="shooting-screen">
+            <div id="computer-choice"></div>
+            <div id="player-choice"></div>
         </div>
-        <div id="computer-column">
-            <div class="pfp">
-                💻
-            </div>
-            <div class="points">
-                
-            </div>
-            <div class="move">
-                
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        Copyright &nbsp;© &nbsp;MetallicCrimson 2026
+
+        <div id="player-healthbar" class="healthbar"></div>
     </div>
 </body>
 </html>
