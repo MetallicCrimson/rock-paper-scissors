@@ -1,5 +1,9 @@
 const SPEED = 5;
-const HEALTH_UNIT = 560 / 5;
+const width = 550;
+const height = 715;
+
+const FULL_HEALTH = 3;
+const HEALTH_UNIT = 560 / FULL_HEALTH;
 
 function keyDownFunction(e) {
     switch (e.code) {
@@ -47,13 +51,8 @@ function testFunction(e) {
     console.log(e);
 }
 
-// function step(ts) {
-//     test.style.top = (test.getBoundingClientRect().top + 1) + "px";
-//     requestAnimationFrame(step);
-// }
 
 const testPlayer = document.querySelector("#player");
-// const testRect = testPlayer.getBoundingClientRect();
 const container = document.querySelector("#container");
 const playingScreen = document.querySelector("#playing-screen");
 const shootingScreen = document.querySelector("#shooting-screen");
@@ -61,6 +60,7 @@ const playerChoiceDiv = document.querySelector("#player-choice");
 const computerChoiceDiv = document.querySelector("#computer-choice");
 const playerHealthbar = document.querySelector("#player-healthbar");
 const computerHealthbar = document.querySelector("#computer-healthbar");
+const gameOver = document.querySelector("#gameover");
 
 document.body.addEventListener("keydown", keyDownFunction);
 document.body.addEventListener("keyup", keyUpFunction);
@@ -70,23 +70,22 @@ let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-const width = 550;
-const height = 715;
+const winningText = `You win!\nHow... how could this happen?\n\n\n
+< restart by pressing the spacebar >`;
+const losingText = `You lost!\nFool, did you really think you can defeat me?\n\n\n
+< restart by pressing the spacebar >`;
 
 let playerHealth;
 let computerHealth;
 
-// let yOffset = container.getBoundingClientRect().top
-// let xOffset = container.getBoundingClientRect().left
-
-
-
 function initializeGame() {
-    playerHealth = 5;
-    computerHealth = 5;
+    playerHealth = FULL_HEALTH;
+    computerHealth = FULL_HEALTH;
 
-    playerHealthbar.style.width = 5*HEALTH_UNIT + "px";
-    computerHealthbar.style.width = 5*HEALTH_UNIT + "px";
+    gameOver.style.opacity = 0;
+
+    playerHealthbar.style.width = FULL_HEALTH*HEALTH_UNIT + "px";
+    computerHealthbar.style.width = FULL_HEALTH*HEALTH_UNIT + "px";
 
     initializeRound();   
 }
@@ -94,8 +93,6 @@ function initializeGame() {
 function initializeRound() {
     playingScreen.classList.remove("inactive");
     shootingScreen.classList.add("inactive");
-
-    // transition: transform 1.5s, top 1.5s;
 
     playerChoiceDiv.style.transition = "transform 0s, top 0s";
     computerChoiceDiv.style.transition = "transform 0s, top 0s";
@@ -112,9 +109,13 @@ function initializeRound() {
     testPlayer.style.top = "650px";
 }
 
+
+// This could have been done much cleaner by adding/removing the
+// event listener on each occasion.
+// Alas, I will absolutely not refactor it
 function moveByFrame () {
     if (playingScreen.classList.contains("inactive")) return;
-    // testPlayer.style.top = testPlayer.getBoundingClientRect().top-40 + SPEED + "px";
+    
     if (leftPressed && parseInt(testPlayer.style.left) >= SPEED) {
         testPlayer.style.left = parseInt(testPlayer.style.left) - SPEED + "px";
         console.log(testPlayer.style.left);
@@ -147,15 +148,20 @@ function moveByFrame () {
     }
 }
 
+function gameOverKeyListener (e) {
+    if (e.code !== "Space") return;
+
+    this.removeEventListener("keyup", gameOverKeyListener);
+    initializeGame();
+}
+
 window.onload = function() {
     this.setInterval(moveByFrame, (1000/60));
 
     initializeGame();
-
-    
 }
 
-function parseChoice(choice) {
+function getChoiceText(choice) {
     switch (choice) {
         case 0:
             return "rock";
@@ -165,7 +171,7 @@ function parseChoice(choice) {
             return "scissors";
         default:
             break;
-    }h
+    }
 }
 
 function getChoiceCharacter(choice) {
@@ -188,8 +194,8 @@ function playRound(playerChoiceInt, computerChoiceInt) {
     shootingScreen.classList.remove("inactive");
 
     let winStatus;
-    playerChoice = parseChoice(playerChoiceInt);
-    computerChoice = parseChoice(computerChoiceInt);
+    playerChoice = getChoiceText(playerChoiceInt);
+    computerChoice = getChoiceText(computerChoiceInt);
 
     if (playerChoice === "rock") {
         switch (computerChoice) {
@@ -241,11 +247,6 @@ function playRound(playerChoiceInt, computerChoiceInt) {
 
     setTimeout(() => {
         if (winStatus === 0) {
-            // computerChoiceDiv.style.transition = "top .5s linear";
-            // computerChoiceDiv.style.top = "330px";
-            // playerChoiceDiv.style.transition = "top " + (11/4) + "s linear";
-            // playerChoiceDiv.style.top = "10px";
-
             playerChoiceDiv.style.animationName = "player-winning";
             computerChoiceDiv.style.animationName = "computer-losing";
 
@@ -265,25 +266,24 @@ function playRound(playerChoiceInt, computerChoiceInt) {
             playerHealthbar.style.width = playerHealth*HEALTH_UNIT + "px";
             computerHealthbar.style.width = computerHealth*HEALTH_UNIT + "px";
 
-            if (playerHealth <= 0) {
-                console.log("You lose!");
-            } else if (computerHealth <= 0) {
-                console.log("You win!");
-            } else {
-                setTimeout(() => {
+            if (playerHealth >= 1 && computerHealth >= 1) {
+               setTimeout(() => {
                     initializeRound();
-                }, 500);
-                
-                
-                // initializeRound();
+                }, 500); 
+            } else {
+                if (playerHealth <= 0) {
+                    gameOver.innerText = losingText;
+                } else {
+                    gameOver.innerText = winningText;
+                }
+            document.body.addEventListener("keyup", gameOverKeyListener);
+
+                setTimeout(() => {
+                    gameOver.style.opacity = "100%";
+                }, 700);
             }
         }, 900);
 
-    }, 1500);
-
-    
-    
-
-    
+    }, 1500);    
 }
 
