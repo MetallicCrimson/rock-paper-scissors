@@ -205,8 +205,10 @@ function playRound(playerChoiceInt, computerChoiceInt) {
     playerChoice = getChoiceText(playerChoiceInt);
     computerChoice = getChoiceText(computerChoiceInt);
 
-    computerChoiceInt = 0;
-    computerChoice = "rock";
+    // This was for debugging, so the computer always chooses rock.
+
+    // computerChoiceInt = 0;
+    // computerChoice = "rock";
 
     if (playerChoice === "rock") {
         switch (computerChoice) {
