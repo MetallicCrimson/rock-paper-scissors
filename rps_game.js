@@ -2,7 +2,9 @@ const SPEED = 5;
 const width = 550;
 const height = 715;
 
-const FULL_HEALTH = 3;
+// You can modify full health, the game aligns itself to
+// use it correctly
+const FULL_HEALTH = 2;
 const HEALTH_UNIT = 560 / FULL_HEALTH;
 
 function keyDownFunction(e) {
