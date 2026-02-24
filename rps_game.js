@@ -4,7 +4,7 @@ const height = 715;
 
 // You can modify full health, the game aligns itself to
 // use it correctly
-const FULL_HEALTH = 2;
+const FULL_HEALTH = 5;
 const HEALTH_UNIT = 560 / FULL_HEALTH;
 
 function keyDownFunction(e) {
@@ -80,9 +80,15 @@ const losingText = `You lost!\nFool, did you really think you can defeat me?\n\n
 let playerHealth;
 let computerHealth;
 
+let playerHitCounter;
+let computerHitCounter;
+
 function initializeGame() {
     playerHealth = FULL_HEALTH;
     computerHealth = FULL_HEALTH;
+
+    playerHitCounter = 0;
+    computerHitCounter = 0;
 
     gameOver.style.opacity = 0;
 
@@ -199,6 +205,9 @@ function playRound(playerChoiceInt, computerChoiceInt) {
     playerChoice = getChoiceText(playerChoiceInt);
     computerChoice = getChoiceText(computerChoiceInt);
 
+    computerChoiceInt = 0;
+    computerChoice = "rock";
+
     if (playerChoice === "rock") {
         switch (computerChoice) {
             case "rock":
@@ -249,16 +258,32 @@ function playRound(playerChoiceInt, computerChoiceInt) {
 
     setTimeout(() => {
         if (winStatus === 0) {
+            computerHitCounter = 0;
+            if (++playerHitCounter >= 3 && computerHealth > 1) {
+                computerHealth--;
+                playerHitCounter = 0;
+            }
+
             playerChoiceDiv.style.animationName = "player-winning";
             computerChoiceDiv.style.animationName = "computer-losing";
 
+        
             computerHealth--;
         } else if (winStatus === 1) {
+            playerHitCounter = 0;
+            if (++computerHitCounter >= 3 && playerHealth > 1) {
+                playerHealth--;
+                computerHitCounter = 0;
+            }
+
             playerChoiceDiv.style.animationName = "player-losing";
             computerChoiceDiv.style.animationName = "computer-winning";
 
             playerHealth--;
         } else {
+            playerHitCounter = 0;
+            computerHitCounter = 0;
+
             playerChoiceDiv.style.animationName = "player-losing";
             computerChoiceDiv.style.animationName = "computer-losing";
         }
